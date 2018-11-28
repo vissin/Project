@@ -1,0 +1,5 @@
+com\medicalabuseprevention\dao\StudentDAO.class
+com\medicalabuseprevention\dao\StudentDAOImpl.class
+com\medicalabuseprevention\controller\StudentController.class
+com\medicalabuseprevention\controller\SpringRestTemplateClient.class
+com\medicalabuseprevention\model\Student.class
