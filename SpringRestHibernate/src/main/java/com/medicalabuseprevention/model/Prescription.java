@@ -28,14 +28,6 @@ public class Prescription {
 	@Column(name="VISITID")
 	private Long visitId;
 	 
-
-	@Override
-	public String toString() {
-		return "Prescription [id=" + id + ", medicine=" + medicine
-				+ ", dosage=" + dosage + ", days=" + days + ", times=" + times
-				+ "]";
-	}
-
 	public long getId() {
 		return id;
 	}
@@ -83,4 +75,12 @@ public class Prescription {
 	public void setVisitId(Long visitId) {
 		this.visitId = visitId;
 	}
+
+	@Override
+	public String toString() {
+		return "Prescription [id=" + id + ", medicine=" + medicine
+				+ ", dosage=" + dosage + ", days=" + days + ", times=" + times
+				+ ", visitId=" + visitId + "]";
+	}
+	
 }
