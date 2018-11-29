@@ -1,7 +1,6 @@
 package com.medicalabuseprevention.model;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,14 +11,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="chemist")
-public class Chemist {
+public class Chemist extends AbstractEntity {
 	
 	@Column(name="NAME")
 	private String name;
 	
 	@Column(name="BIRTH_DATE")
 	@DateTimeFormat(pattern = "dd.MM.yyyy")
-	private LocalDate birthDate;
+	private Date birthDate;
 	
 	@Column(name="MOBILE")
 	private long mobile;
@@ -33,26 +32,16 @@ public class Chemist {
 	@Column(name="PASSWORD")
 	private String password;
 	
-	@Id
-	@Column(name="ID")
-	private long id;
-	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public LocalDate getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(LocalDate birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 	public long getMobile() {
@@ -82,7 +71,7 @@ public class Chemist {
 	
 	@Override
 	public String toString() {
-		return "Chemist [id=" + id + ", name=" + name
+		return "Chemist [id=" + ", name=" + name
 				+ ", birthdate=" + birthDate + ", mobile=" + mobile + ", email=" + email
 				+ ", userId=" + userId + ", password=" +password+"]";
 	}

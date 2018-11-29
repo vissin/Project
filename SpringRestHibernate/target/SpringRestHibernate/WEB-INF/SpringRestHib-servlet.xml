@@ -22,12 +22,12 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/test" />
+		<property name="url" value="jdbc:mysql://localhost/medical" />
 		<property name="username" value="root" />
 		<property name="password" value="password" />
 	</bean>
 
-	<!-- Hiberante Sesssion Factory Configurations -->
+	<!-- Hiberante Sesssion Factory Configurations 
  <bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -43,9 +43,9 @@
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
-	</bean> 
+	</bean> -->
 
-	<!-- Hiberante Entity Manager Configurations 
+	<!-- Hiberante Entity Manager Configurations -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -62,7 +62,7 @@
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
-	</bean>-->
+	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />

@@ -3,38 +3,31 @@ package com.medicalabuseprevention.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "prescription")
-public class Prescription {
-	
-	@Id
-    @Column(name="ID")
-    private long id;
-	
-	@Column(name="MEDICINE")
-	private String medicine;
-	
-	 @Column(name="DOSAGE")
-	private String dosage;
-	
-	 @Column(name="DAYS")
-	private Long days;
-	
-	@Column(name="TIMES")
-	private Long times;
-	 
-	@Column(name="VISITID")
-	private Long visitId;
-	 
-	public long getId() {
-		return id;
-	}
+@NamedQueries(value = { @NamedQuery(name = "findPrescriptionForVisitId", query = "SELECT p FROM Prescription p where p.visitId =:visitId") })
+public class Prescription extends AbstractEntity {
 
-	public void setId(long id) {
-		this.id = id;
-	}
+
+	@Column(name = "MEDICINE")
+	private String medicine;
+
+	@Column(name = "DOSAGE")
+	private String dosage;
+
+	@Column(name = "DAYS")
+	private Long days;
+
+	@Column(name = "TIMES")
+	private Long times;
+
+	@Column(name = "VISITID")
+	private Long visitId;
+
 
 	public String getMedicine() {
 		return medicine;
@@ -78,9 +71,9 @@ public class Prescription {
 
 	@Override
 	public String toString() {
-		return "Prescription [id=" + id + ", medicine=" + medicine
+		return "Prescription [id=" + ", medicine=" + medicine
 				+ ", dosage=" + dosage + ", days=" + days + ", times=" + times
 				+ ", visitId=" + visitId + "]";
 	}
-	
+
 }

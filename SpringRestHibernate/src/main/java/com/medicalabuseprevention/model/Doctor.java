@@ -8,8 +8,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="doctor")
-public class Doctor {
-
+public class Doctor extends AbstractEntity{
+	
 	@Column(name="NAME")
 	private String name;
 	

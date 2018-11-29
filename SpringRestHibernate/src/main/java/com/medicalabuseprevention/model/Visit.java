@@ -9,11 +9,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="visit")
-public class Visit {
+public class Visit extends AbstractEntity {
 	
-	@Id
-	@Column(name="ID")
-	private long id;
 	
 	@Column(name="PATIENT_ID")
 	private String patientId;
@@ -89,12 +86,6 @@ public class Visit {
 		this.bloodPressure = bloodPressure;
 	}
 		
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	public String getPatientId() {
 		return patientId;
 	}

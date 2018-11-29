@@ -10,11 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="patient")
-public class Patient {
-
-	@Id
-	@Column(name="ID")
-	private long id;
+public class Patient extends AbstractEntity {
 	
 	@Column(name="NAME")
 	private String name;
@@ -37,12 +33,6 @@ public class Patient {
 	@Column(name="RELATIVE")
 	private String relative;
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
