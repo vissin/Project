@@ -3,7 +3,11 @@ package com.medicalabuseprevention.model;
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="doctor")
 public class Doctor {
 
 	@Column(name="NAME")

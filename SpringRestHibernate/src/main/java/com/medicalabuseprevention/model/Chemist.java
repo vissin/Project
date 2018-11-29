@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="Chemist")
+@Table(name="chemist")
 public class Chemist {
 	
 	@Column(name="NAME")
@@ -36,6 +36,7 @@ public class Chemist {
 	@Id
 	@Column(name="ID")
 	private long id;
+	
 	public long getId() {
 		return id;
 	}

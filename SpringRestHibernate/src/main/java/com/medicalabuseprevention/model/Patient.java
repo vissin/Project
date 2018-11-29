@@ -2,11 +2,41 @@ package com.medicalabuseprevention.model;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="patient")
 public class Patient {
 
+	@Id
+	@Column(name="ID")
 	private long id;
+	
+	@Column(name="NAME")
 	private String name;
+	
+	@Column(name="BIRTH_DATE")
 	private Date birthDate;
+	
+	@Column(name="MOBILE")
+	private long mobile;
+	
+	@Column(name="GENDER")
+	private boolean gender;
+	
+	@Column(name="USER_ID")
+	private long userId;
+	
+	@Column(name="ENCRYPTED_PASS")
+	private String encryptionPassword;
+	
+	@Column(name="RELATIVE")
+	private String relative;
+	
 	public long getId() {
 		return id;
 	}
@@ -55,11 +85,6 @@ public class Patient {
 	public void setRelative(String relative) {
 		this.relative = relative;
 	}
-	private long mobile;
-	private boolean gender;
-	private long userId;
-	private String encryptionPassword;
-	private String relative;
 	
 	
 }
