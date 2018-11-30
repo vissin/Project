@@ -24,18 +24,17 @@ public class Patient extends AbstractEntity {
   private Date birthDate;
 
   @Column(name = "MOBILE")
-  private long mobile;
+  private Long mobile;
 
   @Column(name = "GENDER")
   private Gender gender;
 
   @Column(name = "USER_ID")
-  private long userId;
+  private String userId;
 
   @Column(name = "PASSWORD")
   private String password;
   
-  private List<Visit> visitDetails;
 
   public String getName() {
     return name;
@@ -53,11 +52,11 @@ public class Patient extends AbstractEntity {
     this.birthDate = birthDate;
   }
 
-  public long getMobile() {
+  public Long getMobile() {
     return mobile;
   }
 
-  public void setMobile(long mobile) {
+  public void setMobile(Long mobile) {
     this.mobile = mobile;
   }
 
@@ -69,11 +68,11 @@ public class Patient extends AbstractEntity {
     this.gender = gender;
   }
 
-  public long getUserId() {
+  public String getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(String userId) {
     this.userId = userId;
   }
 
@@ -83,13 +82,5 @@ public class Patient extends AbstractEntity {
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  public List<Visit> getVisitDetails() {
-    return visitDetails;
-  }
-
-  public void setVisitDetails(List<Visit> visitDetails) {
-    this.visitDetails = visitDetails;
   }
 }

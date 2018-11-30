@@ -1,5 +1,6 @@
 package com.medicalabuseprevention.model;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -15,50 +16,48 @@ import javax.persistence.Table;
 )
 public class Visit extends AbstractEntity {
 
-  @Column(name = "PATIENT_ID")
-  private String patientId;
+  private Long patientId;
 
-  @Column(name = "DOCTOR_ID")
-  private String doctorId;
 
-  @Column(name = "WEIGHT")
-  private long weight;
+  private Long doctorId;
 
-  @Column(name = "HEIGHT")
-  private String height;
 
-  @Column(name = "BP")
+  private String weight;
+
+  
+  private BigDecimal height;
+
   private String bloodPressure;
 
-  @Column(name = "TEMPERATURE")
-  private String temperature;
 
-  @Column(name = "PRESCRIPTION_ID")
+  private Long temperature;
+
+ 
   private String prescriptionId;
 
-  @Column(name = "PURCHASE_FLAG")
+
   private boolean purchaseFlag;
 
-  @Column(name = "VISIT_DATE")
+
   private Date visitDate;
 
   public String getBloodPressure() {
     return bloodPressure;
   }
 
-  public long getWeight() {
+  public String getWeight() {
     return weight;
   }
 
-  public void setWeight(long weight) {
+  public void setWeight(String weight) {
     this.weight = weight;
   }
 
-  public String getTemperature() {
+  public Long getTemperature() {
     return temperature;
   }
 
-  public void setTemperature(String temperature) {
+  public void setTemperature(Long temperature) {
     this.temperature = temperature;
   }
 
@@ -82,27 +81,27 @@ public class Visit extends AbstractEntity {
     this.bloodPressure = bloodPressure;
   }
 
-  public String getPatientId() {
+  public Long getPatientId() {
     return patientId;
   }
 
-  public void setPatientId(String patientId) {
+  public void setPatientId(Long patientId) {
     this.patientId = patientId;
   }
 
-  public String getDoctorId() {
+  public Long getDoctorId() {
     return doctorId;
   }
 
-  public void setDoctorId(String doctorId) {
+  public void setDoctorId(Long doctorId) {
     this.doctorId = doctorId;
   }
 
-  public String getHeight() {
+  public BigDecimal getHeight() {
     return height;
   }
 
-  public void setHeight(String height) {
+  public void setHeight(BigDecimal height) {
     this.height = height;
   }
 

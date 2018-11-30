@@ -23,7 +23,7 @@ public class Doctor extends AbstractEntity {
   private String email;
 
   @Column(name = "USER_ID")
-  private long userId;
+  private String userId;
 
   @Column(name = "PASSWORD")
   private String password;
@@ -52,11 +52,11 @@ public class Doctor extends AbstractEntity {
     this.email = email;
   }
 
-  public long getUserId() {
+  public String getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(String userId) {
     this.userId = userId;
   }
 
