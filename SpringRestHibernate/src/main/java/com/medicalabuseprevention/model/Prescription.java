@@ -9,7 +9,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "prescription")
 @NamedQueries(value = {
-  @NamedQuery(name = "findPrescriptionForVisitId", query = "SELECT p FROM Prescription p where p.visitId =:visitId")})
+  @NamedQuery(name = "findPrescriptionForVisitId", query = "SELECT p FROM Prescription p where p.visitId =:visitId"),
+  @NamedQuery(name = "findPrescriptionById", query = "SELECT p FROM Prescription p where p.Id =:id")})
 public class Prescription extends AbstractEntity {
 
   @Column(name = "MEDICINE")
@@ -29,7 +30,7 @@ public class Prescription extends AbstractEntity {
   
   @Column(name = "PROVIDED", columnDefinition = "BIT", length = 1)
   private boolean provided;
-
+  
   public String getMedicine() {
     return medicine;
   }

@@ -2,10 +2,15 @@ package com.medicalabuseprevention.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "doctor")
+@NamedQueries(value = {
+  @NamedQuery(name = "findDoctorById", query = "SELECT p FROM Doctor p where p.id =:doctorId")}
+)
 public class Doctor extends AbstractEntity {
 
   @Column(name = "NAME")

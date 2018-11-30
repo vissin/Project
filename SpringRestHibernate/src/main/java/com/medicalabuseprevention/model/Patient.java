@@ -2,13 +2,19 @@ package com.medicalabuseprevention.model;
 
 import com.medicalabuseprevention.enums.Gender;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "patient")
+@NamedQueries(value = {
+  @NamedQuery(name = "findPatientById", query = "SELECT p FROM Patient p where p.id =:patId")}
+)
 public class Patient extends AbstractEntity {
 
   @Column(name = "NAME")
@@ -28,6 +34,8 @@ public class Patient extends AbstractEntity {
 
   @Column(name = "PASSWORD")
   private String password;
+  
+  private List<Visit> visitDetails;
 
   public String getName() {
     return name;
@@ -77,4 +85,11 @@ public class Patient extends AbstractEntity {
     this.password = password;
   }
 
+  public List<Visit> getVisitDetails() {
+    return visitDetails;
+  }
+
+  public void setVisitDetails(List<Visit> visitDetails) {
+    this.visitDetails = visitDetails;
+  }
 }
