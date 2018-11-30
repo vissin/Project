@@ -2,6 +2,7 @@ package com.medicalabuseprevention.controller;
 
 import com.medicalabuseprevention.model.Doctor;
 import com.medicalabuseprevention.model.Patient;
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,7 @@ import com.medicalabuseprevention.model.Prescription;
 import com.medicalabuseprevention.requestdto.PrescriptionUpdateRequest;
 import com.medicalabuseprevention.model.Visit;
 import com.medicalabuseprevention.requestdto.VisitDTO;
+
 import java.util.logging.Level;
 
 @RestController
@@ -62,12 +65,13 @@ public class PrescriptionController {
    * @return  **
    */
   @RequestMapping(value = "/prescription/update", produces = "application/json", method = RequestMethod.POST)
-  public boolean updatePrescription(@PathVariable("prescriptionUpdateRequest") List<PrescriptionUpdateRequest> pUpdateReqeust) {
-    for (PrescriptionUpdateRequest pRequest : pUpdateReqeust) {
-      Prescription prescription = em.createNamedQuery("findPrescriptionById", Prescription.class).setParameter("id", pRequest.getId()).getSingleResult();
-      prescription.setProvided(pRequest.isProvided());
+  public boolean updatePrescription(@RequestBody PrescriptionUpdateRequest pUpdateReqeust) {
+    //for (PrescriptionUpdateRequest pRequest : pUpdateReqeust) {
+	  System.out.println("updatePrescription-updatePrescription-updatePrescription-updatePrescription");
+      Prescription prescription = em.createNamedQuery("findPrescriptionById", Prescription.class).setParameter("id", pUpdateReqeust.getId()).getSingleResult();
+      prescription.setProvided(pUpdateReqeust.isProvided());
       em.merge(prescription);
-    }
+    //}
     return true;
   }
 
