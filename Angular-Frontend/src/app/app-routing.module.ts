@@ -5,6 +5,7 @@ import { PatientComponent } from './patient/patient.component';
 import { DoctorComponent } from './doctor/doctor.component';
 
 import { ChemistComponent } from 'src/app/chemist/chemist.component';
+import { PatientHistoryComponent } from './patient-history/patient-history.component';
 
 // const routes: Routes = [
 //   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'doctor/:id',
     component: DoctorComponent
+  },
+  {
+    path: 'patient-history/:id',
+    component: PatientHistoryComponent
   }
 ];
 
