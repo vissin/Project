@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PatientModel } from 'src/app/model/PatientModel';
+import { isNullOrUndefined } from 'util';
+import { ActivatedRoute, Params } from '@angular/router';
+import { CommonService } from 'src/app/service/common.service';
+import { Patient } from 'src/app/model/patient';
 
 @Component({
   selector: 'app-patient',
@@ -7,10 +10,26 @@ import { PatientModel } from 'src/app/model/PatientModel';
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
- 
-  constructor() { }
+
+  patientHistory: Patient[] = [] as Patient[];
+
+  constructor(private route: ActivatedRoute, private commonService: CommonService) { }
 
   ngOnInit() {
+    this.getPatientId();
+  }
+
+  getPatientId() {
+    this.route.params.subscribe((params: Params) => {
+      const patientId = params['id'];
+      if (!isNullOrUndefined(patientId)) {
+        this.commonService.getPatientHistory(patientId).subscribe(
+          (data) => {
+            this.patientHistory = data;
+          }
+        );
+      }
+    });
   }
 
 }

@@ -1,13 +1,17 @@
 <div class="container-fluid main-content">
-  <div class="">
     <div class="login-content">
       <form (ngSubmit)="onSearchSubmit(searchForm)" #searchForm="ngForm">
       <div class="row">
         <div class="col-md-4"></div>
-        <div class="col-md-4"><input name="search" class="form-control" placeholder="Search" type="text" /></div>
-        <div class="col-md-4"><input class="btn btn-primary" type="submit" value="Search"/></div>
+        <div class="col-md-4">
+        <input name="searchtext" class="form-control" id="search" type="text" [(ngModel)]="search"  #searchtext="ngModel" placeholder="Search by Patient Id"/>
+        </div>
+        <div class="col-md-4">
+          <input class="btn btn-primary" type="submit" value="Search"/>
+        </div>
       </div>
     </form>
+    <div style="margin-top: 20px;border: 2px solid#dcd1d1;padding: 30px;">
       <div class="text-center">
         <h2>Patient Form</h2>
         <div class="alert">
@@ -84,7 +88,7 @@
         </div>
       </div>
     </div>
-  </div>
+    </div>
 </div>
 
   <!-- Modal -->

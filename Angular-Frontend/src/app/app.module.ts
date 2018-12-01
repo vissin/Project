@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PatientComponent } from './patient/patient.component';
+import { ChemistComponent } from './chemist/chemist.component';
 import { DoctorComponent } from './doctor/doctor.component';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { DoctorComponent } from './doctor/doctor.component';
     HeaderComponent,
     FooterComponent,
     PatientComponent,
+    ChemistComponent,
     DoctorComponent
   ],
   imports: [

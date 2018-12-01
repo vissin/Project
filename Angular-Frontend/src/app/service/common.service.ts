@@ -8,11 +8,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CommonService {
 
-    baseUrl = 'http://SLW10350.spanservices.com:8080/SpringRestHibernate/';
+    baseUrl = 'http://SLW10162.spanservices.com:28080/SpringRestHibernate/';
 
     constructor(private http: HttpClient) { }
 
     userLogin(loginModel): Observable<any> {
-        return this.http.post(this.baseUrl + '/user/login', loginModel).map(res => res);
+        debugger;
+        return this.http.post(this.baseUrl + 'user/login', loginModel).map(res => res);
+    }
+
+    getPatientHistory(id): Observable<any> {
+        return this.http.get(this.baseUrl + 'patient/' + id).map(res => res);
     }
 }

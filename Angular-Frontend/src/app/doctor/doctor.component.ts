@@ -9,11 +9,11 @@ import * as $ from 'jquery';
   styleUrls: ['./doctor.component.css']
 })
 export class DoctorComponent implements OnInit {
+  search: string;
   patientModel: PatientModel = {} as PatientModel;
   medModel: PrescriptionMed = {} as PrescriptionMed;
- 
-  constructor() { }
- 
+  constructor() {
+   }
   ngOnInit() {
     this.patientModel.medicines = [];
   }
@@ -27,9 +27,9 @@ export class DoctorComponent implements OnInit {
      this.medModel = {} as PrescriptionMed;
   }
   onSubmit() {
-
   }
   onSearchSubmit() {
-
+    console.log(this.search);
+    debugger;
   }
 }
