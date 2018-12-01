@@ -48,18 +48,39 @@ public class UserController {
     userDTO.setRole(user.getRole());
     
     if(user.getRole().equalsIgnoreCase("D")){
-      Doctor doctor = em.createNamedQuery("findDoctorByUserId", Doctor.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
-      userDTO.setDoctor(doctor);
+      try {
+        Doctor doctor = em.createNamedQuery("findDoctorByUserId", Doctor.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
+        userDTO.setDoctor(doctor);
+        userDTO.setResult("Success");
+        return userDTO;
+      } catch(Exception e){
+        logger.info("");
+        userDTO.setResult("Not Found");
+      }
     }
     
     if(user.getRole().equalsIgnoreCase("C")){
-      Chemist chemist = em.createNamedQuery("findPatientById", Chemist.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
-      userDTO.setChemist(chemist);
+      try {  
+        Chemist chemist = em.createNamedQuery("findPatientById", Chemist.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
+        userDTO.setChemist(chemist);
+        userDTO.setResult("Success");
+        return userDTO;
+      } catch(Exception e){
+        logger.info("");
+        userDTO.setResult("Not Found");
+      }
     }
     
     if(user.getRole().equalsIgnoreCase("P")){
-      Patient patient = em.createNamedQuery("findPatientById", Patient.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
-      userDTO.setPatient(patient);
+      try {  
+        Patient patient = em.createNamedQuery("findPatientById", Patient.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
+        userDTO.setPatient(patient);
+        userDTO.setResult("Success");
+        return userDTO;
+      } catch(Exception e){
+        userDTO.setResult("Not Found");
+        logger.info("");
+      }
     }
    
     return userDTO;
