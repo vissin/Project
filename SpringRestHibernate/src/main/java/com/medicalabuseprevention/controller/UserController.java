@@ -1,19 +1,22 @@
 package com.medicalabuseprevention.controller;
 
-import java.util.List;
+import com.medicalabuseprevention.model.Chemist;
+import com.medicalabuseprevention.model.Doctor;
+import com.medicalabuseprevention.model.Patient;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.medicalabuseprevention.model.Prescription;
 import com.medicalabuseprevention.model.User;
+import com.medicalabuseprevention.requestdto.UserDTO;
+import com.medicalabuseprevention.requestdto.UserRequest;
 import java.util.logging.Level;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class UserController {
@@ -25,20 +28,34 @@ public class UserController {
 
   /**
    * * Retrieve a single prescription
-   *
-   * @param name
-   * @param password
+   * @param userRequest
    * @return  **
    */
-  @RequestMapping(value = "/user/{name}/{password}", produces = "application/json", method = RequestMethod.GET)
-  public List<User> authenticateUser(@PathVariable("name") String name, @PathVariable("password") String password) {
-    logger.log(Level.INFO, "authenticateUser: {0} -Psssword :{1}", new Object[]{name, password});
-    List<User> user = em.createNamedQuery("fetchUserForAuth", User.class).setParameter("name", name).setParameter("password", password).getResultList();
-    logger.log(Level.INFO, "getPrescriptionByVisitId: {0}", user);
-    if (user != null && user.size() > 0) {
-      logger.log(Level.INFO, "authenticateUser: {0}", user.size());
+  @RequestMapping(value = "/user/login", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
+  public UserDTO authenticateUser(@RequestBody UserRequest userRequest) {
+    logger.log(Level.INFO, "authenticateUser: {0} -Psssword :{1}", new Object[]{userRequest.getUserId(), userRequest.getPassword()});
+    UserDTO userDTO = new UserDTO();
+    
+    User user = em.createNamedQuery("fetchUserForAuth", User.class).setParameter("name", userRequest.getUserId()).setParameter("password", userRequest.getPassword()).getSingleResult();
+ 
+    userDTO.setUserId(userRequest.getUserId());
+    userDTO.setRole(user.getRole());
+    
+    if(user.getRole().equalsIgnoreCase("D")){
+      Doctor doctor = em.createNamedQuery("findDoctorByUserId", Doctor.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
+      userDTO.setDoctor(doctor);
     }
-    return user;
+    
+    if(user.getRole().equalsIgnoreCase("C")){
+      Chemist chemist = em.createNamedQuery("findPatientById", Chemist.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
+      userDTO.setChemist(chemist);
+    }
+    
+    if(user.getRole().equalsIgnoreCase("P")){
+      Patient patient = em.createNamedQuery("findPatientById", Patient.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
+      userDTO.setPatient(patient);
+    }
+   
+    return userDTO;
   }
-
 }
