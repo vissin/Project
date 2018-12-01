@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginModel } from 'src/app/model/loginModel';
+import { CommonService } from 'src/app/service/common.service';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +9,18 @@ import { LoginModel } from 'src/app/model/loginModel';
 })
 export class LoginComponent implements OnInit {
 
-  loginModel:LoginModel ={} as LoginModel;
+  loginModel: LoginModel = {} as LoginModel;
 
-  constructor() { }
+  constructor(private commonService: CommonService) { }
 
   ngOnInit() {
   }
 
-  onSubmit(){
-       
-      debugger;
-      var k = this.loginModel;
+  onSubmit() {
+    this.commonService.userLogin(this.loginModel).subscribe(
+      (data) => {
+        debugger;
+      }
+    );
   }
 }
