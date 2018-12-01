@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PatientComponent } from './patient/patient.component';
+import { ChemistComponent } from './chemist/chemist.component';
+import { DoctorComponent } from './doctor/doctor.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { PatientComponent } from './patient/patient.component';
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    PatientComponent
+    PatientComponent,
+    ChemistComponent,
+    DoctorComponent
   ],
   imports: [
     BrowserModule,
