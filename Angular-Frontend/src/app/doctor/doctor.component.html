@@ -1,13 +1,14 @@
 <div class="container-fluid main-content">
-    <div class="login-content">
-      <form (ngSubmit)="onSearchSubmit(searchForm)" #searchForm="ngForm">
+  <div class="login-content">
+    <form (ngSubmit)="onSearchSubmit(searchForm)" #searchForm="ngForm">
       <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-        <input name="searchtext" class="form-control" id="search" type="text" [(ngModel)]="search"  #searchtext="ngModel" placeholder="Search by Patient Id"/>
+          <input name="searchtext" class="form-control" id="search" type="text" [(ngModel)]="search" #searchtext="ngModel" placeholder="Search by Patient Id"
+          />
         </div>
         <div class="col-md-4">
-          <input class="btn btn-primary" type="submit" value="Search"/>
+          <input class="btn btn-primary" type="submit" value="Search" />
         </div>
       </div>
     </form>
@@ -18,118 +19,127 @@
           <div></div>
         </div>
       </div>
-      <div >
-        <div >
+      <div>
+        <div>
           <form class="form-horizontal" (ngSubmit)="onSubmit(patientForm)" #patientForm="ngForm">
-              <div class="form-group">
-                <label class="control-label" for="patientId">Patient Id:</label>
-                <input class="form-control" id="patientId" name="patientId" type="text" [(ngModel)]="patientModel.patientId" #patientId="ngModel" required/>
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="height">Height:</label>
-                <input class="form-control" id="height"  name="height" type="text"  [(ngModel)]="patientModel.height" #height="ngModel" required/>
-               
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="weight">Weight:</label>
-                <input class="form-control" type="text" id="weight"  name="weight"  [(ngModel)]="patientModel.weight" #weight="ngModel" required/>
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="findings">Findings:</label>
-                <input class="form-control" type="text" id="findings"  name="findings"   [(ngModel)]="patientModel.findings" #findings="ngModel" required/>
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="followupDate">Follow-up Date:</label>
-                <input class="form-control" type="date" id="followupDate"  name="followupDate"   [(ngModel)]="patientModel.followupDate" #followupDate="ngModel" required/>
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="bloodPressure">Blood-Pressure:</label>
-                <input class="form-control" type="text" id="bloodPressure"  name="bloodPressure"   [(ngModel)]="patientModel.bloodPressure" #bloodPressure="ngModel" required/>
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="temprature">Temperature:</label>
-                <input class="form-control" type="text" id="temprature"  name="temprature"   [(ngModel)]="patientModel.temprature" #temprature="ngModel" required/>
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="symptoms">Symptoms:</label>
-                <input class="form-control" type="text" id="symptoms"  name="symptoms"   [(ngModel)]="patientModel.symptoms" #symptoms="ngModel" required/>
-              </div>
-              <div>
-                <label class="control-label" for="symptoms">Medicines:</label>
-                <button type="button"  color="primary" class="relative waves-light" data-toggle="modal" data-target="#myModal">Add Medicine</button>
-                <table class="table"  *ngIf="patientModel.medicines.length>0">
-                    <thead>
-                      <tr>
-                        <th>Medicine</th>
-                        <th>Dosage</th>
-                        <th>Days</th>
-                        <th>Times</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody *ngFor="let med of patientModel.medicines,index as i">
-                      <tr>
-                        <td>{{med.medicine}}</td>
-                        <td>{{med.dosage}}</td>
-                        <td>{{med.days}}</td>
-                        <td>{{med.times}}</td>
-                        <td><i (click)="delete(i)" class="fa fa-trash"></i></td>
-                      </tr>
-                    </tbody>
-                  </table>
-              </div>
+            <div class="form-group">
+              <label class="control-label" for="patientId">Patient Id:</label>
+              <input class="form-control" id="patientId" name="patientId" type="text" [(ngModel)]="patientModel.patientId" #patientId="ngModel"
+                required/>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="height">Height:</label>
+              <input class="form-control" id="height" name="height" type="text" [(ngModel)]="patientModel.height" #height="ngModel" required/>
 
-              <div class="control-group">
-                <div class="controls">
-                  <input value="Submit" class="btn btn-primary" type="submit">
-                </div>
-              </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    </div>
-</div>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="weight">Weight:</label>
+              <input class="form-control" type="text" id="weight" name="weight" [(ngModel)]="patientModel.weight" #weight="ngModel" required/>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="findings">Findings:</label>
+              <input class="form-control" type="text" id="findings" name="findings" [(ngModel)]="patientModel.findings" #findings="ngModel"
+                required/>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="followupDate">Follow-up Date:</label>
+              <input class="form-control" type="date" id="followupDate" name="followupDate" [(ngModel)]="patientModel.followupDate" #followupDate="ngModel"
+                required/>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="bloodPressure">Blood-Pressure:</label>
+              <input class="form-control" type="text" id="bloodPressure" name="bloodPressure" [(ngModel)]="patientModel.bloodPressure"
+                #bloodPressure="ngModel" required/>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="temprature">Temperature:</label>
+              <input class="form-control" type="text" id="temprature" name="temprature" [(ngModel)]="patientModel.temprature" #temprature="ngModel"
+                required/>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="symptoms">Symptoms:</label>
+              <input class="form-control" type="text" id="symptoms" name="symptoms" [(ngModel)]="patientModel.symptoms" #symptoms="ngModel"
+                required/>
+            </div>
+            <div>
+              <label class="control-label" for="symptoms">Medicines:</label>
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-        
-          <h4 class="modal-title">Add Medicine</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <form (ngSubmit)="onModalSubmit(medicalForm)" #medicalForm="ngForm">
-            <div class="form-group">
-              <label class="control-label" for="medicine">Medicine</label>
-              <input class="form-control" type="text" id="medicine"  name="medicine"   [(ngModel)]="medModel.medicine" #medicine="ngModel" required/>
+              <i class="fa fa-plus-circle" style="font-size:22px;" data-toggle="modal" data-target="#myModal"></i>
+              <table class="table" *ngIf="patientModel.medicines.length>0">
+                <thead>
+                  <tr>
+                    <th>Medicine</th>
+                    <th>Dosage</th>
+                    <th>Days</th>
+                    <th>Times</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let med of patientModel.medicines,index as i">
+                  <tr>
+                    <td>{{med.medicine}}</td>
+                    <td>{{med.dosage}}</td>
+                    <td>{{med.days}}</td>
+                    <td>{{med.times}}</td>
+                    <td>
+                      <i (click)="delete(i)" class="fa fa-trash"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="form-group">
-              <label class="control-label" for="dosage">Dosage</label>
-              <input class="form-control" type="text" id="dosage"  name="dosage"   [(ngModel)]="medModel.dosage" #dosage="ngModel" required/>
-            </div>
-            <div class="form-group">
-              <label class="control-label" for="days">Days</label>
-              <input class="form-control" type="text" id="days"  name="days"   [(ngModel)]="medModel.days" #days="ngModel" required/>
-            </div>
-            <div class="form-group">
-              <label class="control-label" for="times">Times</label>
-              <input class="form-control" type="text" id="times"  name="times"   [(ngModel)]="medModel.times" #times="ngModel" required/>
-            </div>
+
             <div class="control-group">
-                <div class="controls">
-                  <input value="Submit" class="btn btn-primary"  type="submit">
-                  &nbsp;<button type="button" id="closebtn" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
+              <div class="controls">
+                <input value="Submit" class="btn btn-primary" type="submit">
               </div>
+            </div>
           </form>
         </div>
-       
       </div>
-      
     </div>
   </div>
-  
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title">Add Medicine</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onModalSubmit(medicalForm)" #medicalForm="ngForm">
+          <div class="form-group">
+            <label class="control-label" for="medicine">Medicine</label>
+            <input class="form-control" type="text" id="medicine" name="medicine" [(ngModel)]="medModel.medicine" #medicine="ngModel"
+              required/>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="dosage">Dosage</label>
+            <input class="form-control" type="text" id="dosage" name="dosage" [(ngModel)]="medModel.dosage" #dosage="ngModel" required/>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="days">Days</label>
+            <input class="form-control" type="text" id="days" name="days" [(ngModel)]="medModel.days" #days="ngModel" required/>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="times">Times</label>
+            <input class="form-control" type="text" id="times" name="times" [(ngModel)]="medModel.times" #times="ngModel" required/>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <input value="Submit" class="btn btn-primary" type="submit"> &nbsp;
+              <button type="button" id="closebtn" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
