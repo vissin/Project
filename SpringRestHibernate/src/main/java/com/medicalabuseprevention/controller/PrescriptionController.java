@@ -139,7 +139,7 @@ public class PrescriptionController {
    * @param patientId
    * @return  **
    */
-  @RequestMapping(value = "/patient/{patientId}", produces = "application/json", method = RequestMethod.GET)
+  @RequestMapping(value = "/patienthistory/{patientId}", produces = "application/json", method = RequestMethod.GET)
   public VisitDTO getPatientHistoryByPatientId(@PathVariable("patientId") long patientId) {
     logger.log(Level.INFO, "getPatientDetailsByPatientId: {0}", patientId);
     
@@ -162,7 +162,7 @@ public class PrescriptionController {
    * @param doctorId
    * @return  **
    */
-  @RequestMapping(value = "/patient/{patientId}", produces = "application/json", method = RequestMethod.GET)
+  @RequestMapping(value = "/doctor/{doctorId}", produces = "application/json", method = RequestMethod.GET)
   public Doctor geDoctorDetailsByDoctorId(@PathVariable("doctorId") long doctorId) {
     logger.log(Level.INFO, "geDoctorDetailsByDoctorId: {0}", doctorId);
     Doctor doctor = em.createNamedQuery("findDoctorById", Doctor.class).setParameter("doctorId", doctorId).getSingleResult();
