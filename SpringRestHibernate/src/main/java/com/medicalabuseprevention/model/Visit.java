@@ -18,26 +18,19 @@ public class Visit extends AbstractEntity {
 
   private Long patientId;
 
-
   private Long doctorId;
-
-
-  private String weight;
-
   
-  private BigDecimal height;
+  private String weight;
+  
+  private String height;
 
   private String bloodPressure;
 
-
-  private Long temperature;
-
+  private String temperature;
  
   private String prescriptionId;
 
-
   private boolean purchaseFlag;
-
 
   private Date visitDate;
 
@@ -53,11 +46,11 @@ public class Visit extends AbstractEntity {
     this.weight = weight;
   }
 
-  public Long getTemperature() {
+  public String getTemperature() {
     return temperature;
   }
 
-  public void setTemperature(Long temperature) {
+  public void setTemperature(String temperature) {
     this.temperature = temperature;
   }
 
@@ -97,11 +90,11 @@ public class Visit extends AbstractEntity {
     this.doctorId = doctorId;
   }
 
-  public BigDecimal getHeight() {
+  public String getHeight() {
     return height;
   }
 
-  public void setHeight(BigDecimal height) {
+  public void setHeight(String height) {
     this.height = height;
   }
 

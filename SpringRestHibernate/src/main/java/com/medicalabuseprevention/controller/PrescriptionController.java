@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medicalabuseprevention.model.Prescription;
 import com.medicalabuseprevention.requestdto.PrescriptionUpdateRequest;
 import com.medicalabuseprevention.model.Visit;
+import com.medicalabuseprevention.requestdto.PrescriptionMedDTO;
 import com.medicalabuseprevention.requestdto.VisitDTO;
+import com.medicalabuseprevention.requestdto.VisitPrescriptionDTO;
+import java.util.Date;
 
 import java.util.logging.Level;
 
@@ -78,6 +81,44 @@ public class PrescriptionController {
     return true;
   }
 
+  /**
+   * * Retrieve a single prescription
+   *
+   * @param addPrescriptionRequest
+   * @return  **
+   */
+  @Transactional(propagation = Propagation.REQUIRED)
+  @RequestMapping(value = "/visit/update", produces = "application/json", consumes="application/json", method = RequestMethod.PUT)
+  public boolean updateVisitDetails(@RequestBody VisitPrescriptionDTO addPrescriptionRequest) {
+    
+    Visit visit = new Visit();
+    visit.setBloodPressure(addPrescriptionRequest.getBloodPressure());
+    visit.setDoctorId(addPrescriptionRequest.getDoctorId());
+    visit.setHeight(addPrescriptionRequest.getHeight());
+    visit.setPatientId(addPrescriptionRequest.getPatientId());
+    visit.setPurchaseFlag(false);
+    visit.setVisitDate((java.sql.Date) new Date());
+    visit.setWeight(addPrescriptionRequest.getWeight());
+    visit.setTemperature(addPrescriptionRequest.getTemprature());
+    
+    em.persist(visit);
+    
+    logger.log(Level.INFO, "Visit ID: {0}", visit.getId());
+    
+    for(PrescriptionMedDTO pmd : addPrescriptionRequest.getMedicine()){
+      Prescription pres = new Prescription();
+      pres.setMedicine(pmd.getMedicine());
+      pres.setProvided(false);
+      pres.setDays(pmd.getDays());
+      pres.setDosage(pmd.getDosage());
+      pres.setTimes(pmd.getTimes());
+      pres.setVisitId(visit.getId());
+      
+      em.persist(pres);
+    }
+    return true;
+  }
+  
  /**
    * * Retrieve a single patientDetails
    *
