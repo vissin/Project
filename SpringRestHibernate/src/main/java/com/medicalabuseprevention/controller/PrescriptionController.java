@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,14 +66,15 @@ public class PrescriptionController {
    * @param pUpdateReqeust
    * @return  **
    */
-  @RequestMapping(value = "/prescription/update", produces = "application/json", method = RequestMethod.POST)
-  public boolean updatePrescription(@RequestBody PrescriptionUpdateRequest pUpdateReqeust) {
-    //for (PrescriptionUpdateRequest pRequest : pUpdateReqeust) {
+  @Transactional(propagation = Propagation.REQUIRED)
+  @RequestMapping(value = "/prescription/update", produces = "application/json", consumes="application/json", method = RequestMethod.PUT)
+  public boolean updatePrescription(@RequestBody List<PrescriptionUpdateRequest> pUpdateReqeust) {
+    for (PrescriptionUpdateRequest pRequest : pUpdateReqeust) {
 	  System.out.println("updatePrescription-updatePrescription-updatePrescription-updatePrescription");
-      Prescription prescription = em.createNamedQuery("findPrescriptionById", Prescription.class).setParameter("id", pUpdateReqeust.getId()).getSingleResult();
-      prescription.setProvided(pUpdateReqeust.isProvided());
+      Prescription prescription = em.createNamedQuery("findPrescriptionById", Prescription.class).setParameter("id", pRequest.getId()).getSingleResult();
+      prescription.setProvided(pRequest.isProvided());
       em.merge(prescription);
-    //}
+    }
     return true;
   }
 
