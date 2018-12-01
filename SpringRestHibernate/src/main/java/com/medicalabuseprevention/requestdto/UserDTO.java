@@ -11,6 +11,7 @@ import com.medicalabuseprevention.model.Patient;
 public class UserDTO {
   private String role;
   private String userId;
+  private String result;
   private Doctor doctor;
   private Chemist chemist;
   private Patient patient;
@@ -53,5 +54,13 @@ public class UserDTO {
 
   public void setPatient(Patient patient) {
     this.patient = patient;
+  }
+
+  public String getResult() {
+    return result;
+  }
+
+  public void setResult(String result) {
+    this.result = result;
   }
 }
