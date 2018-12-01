@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PatientComponent } from './patient/patient.component';
+import { DoctorComponent } from './doctor/doctor.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PatientComponent } from './patient/patient.component';
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    PatientComponent
+    PatientComponent,
+    DoctorComponent
   ],
   imports: [
     BrowserModule,

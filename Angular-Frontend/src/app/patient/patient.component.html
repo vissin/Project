@@ -1,1 +1,61 @@
+<div class="container-fluid main-content">
+    <div class="">
+      <div class="login-content">
+  
+        <div class="text-center">
+          <h2>Patient Form</h2>
+  
+          <div class="alert">
+            <div></div>
+          </div>
+        </div>
+        <div >
+          <div >
+            <form class="form-horizontal" (ngSubmit)="onSubmit(patientForm)" #patientForm="ngForm">
+                <div class="form-group">
+                  <label class="control-label" for="patientId">Patient Id:</label>
+                  <input class="form-control" id="patientId" name="patientId" type="text" [(ngModel)]="patientModel.patientId" #patientId="ngModel" required/>
+                 
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="height">Height:</label>
+                  <input class="form-control" id="height"  name="height" type="text"  [(ngModel)]="patientModel.height" #height="ngModel" required/>
+                 
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="weight">Weight:</label>
+                  <input class="form-control" type="text" id="weight"  name="weight"  [(ngModel)]="patientModel.weight" #weight="ngModel" required/>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="findings">Findings:</label>
+                  <input class="form-control" type="text" id="findings"  name="findings"   [(ngModel)]="patientModel.findings" #findings="ngModel" required/>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="followupDate">Follow-up Date:</label>
+                  <input class="form-control" type="text" id="followupDate"  name="followupDate"   [(ngModel)]="patientModel.followupDate" #followupDate="ngModel" required/>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="bloodPressure">Blood-Pressure:</label>
+                  <input class="form-control" type="text" id="bloodPressure"  name="bloodPressure"   [(ngModel)]="patientModel.bloodPressure" #bloodPressure="ngModel" required/>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="temprature">Temperature:</label>
+                  <input class="form-control" type="text" id="temprature"  name="temprature"   [(ngModel)]="patientModel.temprature" #temprature="ngModel" required/>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="symptoms">Symptoms:</label>
+                  <input class="form-control" type="text" id="symptoms"  name="symptoms"   [(ngModel)]="patientModel.symptoms" #symptoms="ngModel" required/>
+                </div>
 
+                <div class="control-group">
+                  <div class="controls">
+                    <input value="Submit" class="btn btn-primary" type="submit">
+                  
+                  </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
