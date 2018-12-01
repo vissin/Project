@@ -22,7 +22,7 @@ import java.util.logging.Level;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
-@CrossOrigin(origins ="*", allowedHeaders="*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserController {
 
@@ -33,56 +33,68 @@ public class UserController {
 
   /**
    * * Retrieve a single prescription
+   *
    * @param userRequest
-   * @return  **
+   * @return **
    */
-
   @RequestMapping(value = "/user/login", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
   public UserDTO authenticateUser(@RequestBody UserRequest userRequest) {
     logger.log(Level.INFO, "authenticateUser: {0} -Psssword :{1}", new Object[]{userRequest.getUserId(), userRequest.getPassword()});
     UserDTO userDTO = new UserDTO();
-    
-    User user = em.createNamedQuery("fetchUserForAuth", User.class).setParameter("name", userRequest.getUserId()).setParameter("password", userRequest.getPassword()).getSingleResult();
- 
     userDTO.setUserId(userRequest.getUserId());
-    userDTO.setRole(user.getRole());
     
-    if(user.getRole().equalsIgnoreCase("D")){
+    User user = null;
+    
+    try {
+      user = em.createNamedQuery("fetchUserForAuth", User.class).setParameter("name", userRequest.getUserId()).setParameter("password", userRequest.getPassword()).getSingleResult();
+      userDTO.setRole(user.getRole());
+
+    } catch (Exception e) {
+      logger.info("Error" + e);
+      userDTO.setResult("Not Found");
+    }
+    
+    if(user==null){
+      logger.info("User not exists");
+      userDTO.setResult("Not Found");
+      return userDTO;
+    }
+    if (user.getRole().equalsIgnoreCase("D")) {
       try {
         Doctor doctor = em.createNamedQuery("findDoctorByUserId", Doctor.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
         userDTO.setDoctor(doctor);
         userDTO.setResult("Success");
         return userDTO;
-      } catch(Exception e){
-        logger.info("");
+      } catch (Exception e) {
+        logger.info("Error" + e);
         userDTO.setResult("Not Found");
       }
     }
-    
-    if(user.getRole().equalsIgnoreCase("C")){
-      try {  
+
+    if (user.getRole().equalsIgnoreCase("C")) {
+      try {
         Chemist chemist = em.createNamedQuery("findPatientById", Chemist.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
         userDTO.setChemist(chemist);
         userDTO.setResult("Success");
         return userDTO;
-      } catch(Exception e){
-        logger.info("");
+      } catch (Exception e) {
+        logger.info("Error: " + e);
         userDTO.setResult("Not Found");
       }
     }
-    
-    if(user.getRole().equalsIgnoreCase("P")){
-      try {  
+
+    if (user.getRole().equalsIgnoreCase("P")) {
+      try {
         Patient patient = em.createNamedQuery("findPatientById", Patient.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
         userDTO.setPatient(patient);
         userDTO.setResult("Success");
         return userDTO;
-      } catch(Exception e){
+      } catch (Exception e) {
+        logger.info("Error: " + e);
         userDTO.setResult("Not Found");
-        logger.info("");
       }
     }
-   
+
     return userDTO;
   }
 }
