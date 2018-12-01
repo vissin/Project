@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medicalabuseprevention.model.Prescription;
 import com.medicalabuseprevention.requestdto.PrescriptionUpdateRequest;
 import com.medicalabuseprevention.model.Visit;
+import com.medicalabuseprevention.requestdto.PrescriptionMedDTO;
 import com.medicalabuseprevention.requestdto.VisitDTO;
+import com.medicalabuseprevention.requestdto.VisitPrescriptionDTO;
+import java.util.ArrayList;
 
+import java.util.Date;
 import java.util.logging.Level;
 
+@CrossOrigin(origins ="*", allowedHeaders="*")
 @RestController
 public class PrescriptionController {
 
@@ -78,6 +84,44 @@ public class PrescriptionController {
     return true;
   }
 
+  /**
+   * * Retrieve a single prescription
+   *
+   * @param addPrescriptionRequest
+   * @return  **
+   */
+  @Transactional(propagation = Propagation.REQUIRED)
+  @RequestMapping(value = "/visit/update", produces = "application/json", consumes="application/json", method = RequestMethod.PUT)
+  public boolean updateVisitDetails(@RequestBody VisitPrescriptionDTO addPrescriptionRequest) {
+    
+    Visit visit = new Visit();
+    visit.setBloodPressure(addPrescriptionRequest.getBloodPressure());
+    visit.setDoctorId(addPrescriptionRequest.getDoctorId());
+    visit.setHeight(addPrescriptionRequest.getHeight());
+    visit.setPatientId(addPrescriptionRequest.getPatientId());
+    visit.setPurchaseFlag(false);
+    visit.setVisitDate((java.sql.Date) new Date());
+    visit.setWeight(addPrescriptionRequest.getWeight());
+    visit.setTemperature(addPrescriptionRequest.getTemprature());
+    
+    em.persist(visit);
+    
+    logger.log(Level.INFO, "Visit ID: {0}", visit.getId());
+    
+    for(PrescriptionMedDTO pmd : addPrescriptionRequest.getMedicine()){
+      Prescription pres = new Prescription();
+      pres.setMedicine(pmd.getMedicine());
+      pres.setProvided(false);
+      pres.setDays(pmd.getDays());
+      pres.setDosage(pmd.getDosage());
+      pres.setTimes(pmd.getTimes());
+      pres.setVisitId(visit.getId());
+      
+      em.persist(pres);
+    }
+    return true;
+  }
+  
  /**
    * * Retrieve a single patientDetails
    *
@@ -98,22 +142,24 @@ public class PrescriptionController {
    * @param patientId
    * @return  **
    */
-  @RequestMapping(value = "/patient/{patientId}", produces = "application/json", method = RequestMethod.GET)
-  public VisitDTO getPatientHistoryByPatientId(@PathVariable("patientId") long patientId) {
+  @RequestMapping(value = "/patienthistory/{patientId}", produces = "application/json", method = RequestMethod.GET)
+  public List<VisitDTO> getPatientHistoryByPatientId(@PathVariable("patientId") long patientId) {
     logger.log(Level.INFO, "getPatientDetailsByPatientId: {0}", patientId);
     
-    VisitDTO visitDto = new VisitDTO();
-  
-    Visit visit = em.createNamedQuery("findVisitByPatientId", Visit.class).setParameter("patientId", patientId).getSingleResult();
-    visitDto.setVisitDTO(visit);
-    
-    List<Prescription> prescription = em.createNamedQuery("findPrescriptionById", Prescription.class).setParameter("id", visit.getPrescriptionId()).getResultList();
-    visitDto.setPrescriptionDTO(prescription);
-
-    //Patient patient = em.createNamedQuery("findPatientById", Patient.class).setParameter("patId", patientId).getSingleResult();
-    logger.log(Level.INFO, "getVisitDetailsByVisitId: {0}", patientId);
-    return visitDto;
-  }  
+    List<VisitDTO> visitListDTO = new ArrayList<>();
+    List<Visit> visit = em.createNamedQuery("findVisitByPatientId", Visit.class).setParameter("patientId", patientId).getResultList();    
+    if(visit!=null && !visit.isEmpty()) {
+      for(Visit v: visit){
+        VisitDTO visitDto = new VisitDTO();
+        visitDto.setVisitDTO(v);
+        List<Prescription> prescription = em.createNamedQuery("findPrescriptionById", Prescription.class).setParameter("id", v.getPrescriptionId()).getResultList();
+        visitDto.setPrescriptionDTO(prescription);
+        visitListDTO.add(visitDto);
+      }
+    } 
+    logger.log(Level.INFO, "getPatientDetailsByPatientId: {0}", patientId);
+    return visitListDTO;
+  }
   
     /**
    * * Retrieve a single patientDetails
@@ -121,7 +167,7 @@ public class PrescriptionController {
    * @param doctorId
    * @return  **
    */
-  @RequestMapping(value = "/patient/{patientId}", produces = "application/json", method = RequestMethod.GET)
+  @RequestMapping(value = "/doctor/{doctorId}", produces = "application/json", method = RequestMethod.GET)
   public Doctor geDoctorDetailsByDoctorId(@PathVariable("doctorId") long doctorId) {
     logger.log(Level.INFO, "geDoctorDetailsByDoctorId: {0}", doctorId);
     Doctor doctor = em.createNamedQuery("findDoctorById", Doctor.class).setParameter("doctorId", doctorId).getSingleResult();
