@@ -12,17 +12,17 @@
         </div>
         <div >
           <div >
-            <form class="form-horizontal">
+            <form class="form-horizontal" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
                 <div class="control-group">
                   <label class="control-label" for="username">Username:</label>
                   <div class="controls">
-                    <input id="username" type="text" required/>
+                    <input id="username" name="userName" type="text" [(ngModel)]="loginModel.userName" #userName="ngModel" required/>
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label" for="password">Password:</label>
                   <div class="controls">
-                    <input id="password" type="password" required/>
+                    <input id="password" name="password" type="password"  [(ngModel)]="loginModel.password" #password="ngModel" required/>
                   </div>
                 </div>
                 <div class="control-group">
