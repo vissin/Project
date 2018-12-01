@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +24,11 @@ import com.medicalabuseprevention.model.Visit;
 import com.medicalabuseprevention.requestdto.PrescriptionMedDTO;
 import com.medicalabuseprevention.requestdto.VisitDTO;
 import com.medicalabuseprevention.requestdto.VisitPrescriptionDTO;
-import java.util.Date;
 
+import java.util.Date;
 import java.util.logging.Level;
 
+@CrossOrigin(origins ="*", allowedHeaders="*")
 @RestController
 public class PrescriptionController {
 

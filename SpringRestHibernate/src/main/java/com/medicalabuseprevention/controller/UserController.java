@@ -3,11 +3,13 @@ package com.medicalabuseprevention.controller;
 import com.medicalabuseprevention.model.Chemist;
 import com.medicalabuseprevention.model.Doctor;
 import com.medicalabuseprevention.model.Patient;
+
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.medicalabuseprevention.model.User;
 import com.medicalabuseprevention.requestdto.UserDTO;
 import com.medicalabuseprevention.requestdto.UserRequest;
+
 import java.util.logging.Level;
+
 import org.springframework.web.bind.annotation.RequestBody;
 
+@CrossOrigin(origins ="*", allowedHeaders="*")
 @RestController
 public class UserController {
 
@@ -31,6 +36,7 @@ public class UserController {
    * @param userRequest
    * @return  **
    */
+
   @RequestMapping(value = "/user/login", produces = "application/json", consumes = "application/json", method = RequestMethod.POST)
   public UserDTO authenticateUser(@RequestBody UserRequest userRequest) {
     logger.log(Level.INFO, "authenticateUser: {0} -Psssword :{1}", new Object[]{userRequest.getUserId(), userRequest.getPassword()});
