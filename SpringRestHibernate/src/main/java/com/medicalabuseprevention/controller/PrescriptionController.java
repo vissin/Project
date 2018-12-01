@@ -24,6 +24,7 @@ import com.medicalabuseprevention.model.Visit;
 import com.medicalabuseprevention.requestdto.PrescriptionMedDTO;
 import com.medicalabuseprevention.requestdto.VisitDTO;
 import com.medicalabuseprevention.requestdto.VisitPrescriptionDTO;
+import java.util.ArrayList;
 
 import java.util.Date;
 import java.util.logging.Level;
@@ -142,21 +143,23 @@ public class PrescriptionController {
    * @return  **
    */
   @RequestMapping(value = "/patienthistory/{patientId}", produces = "application/json", method = RequestMethod.GET)
-  public VisitDTO getPatientHistoryByPatientId(@PathVariable("patientId") long patientId) {
+  public List<VisitDTO> getPatientHistoryByPatientId(@PathVariable("patientId") long patientId) {
     logger.log(Level.INFO, "getPatientDetailsByPatientId: {0}", patientId);
     
-    VisitDTO visitDto = new VisitDTO();
-  
-    Visit visit = em.createNamedQuery("findVisitByPatientId", Visit.class).setParameter("patientId", patientId).getSingleResult();
-    visitDto.setVisitDTO(visit);
-    
-    List<Prescription> prescription = em.createNamedQuery("findPrescriptionById", Prescription.class).setParameter("id", visit.getPrescriptionId()).getResultList();
-    visitDto.setPrescriptionDTO(prescription);
-
-    //Patient patient = em.createNamedQuery("findPatientById", Patient.class).setParameter("patId", patientId).getSingleResult();
-    logger.log(Level.INFO, "getVisitDetailsByVisitId: {0}", patientId);
-    return visitDto;
-  }  
+    List<VisitDTO> visitListDTO = new ArrayList<>();
+    List<Visit> visit = em.createNamedQuery("findVisitByPatientId", Visit.class).setParameter("patientId", patientId).getResultList();    
+    if(visit!=null && !visit.isEmpty()) {
+      for(Visit v: visit){
+        VisitDTO visitDto = new VisitDTO();
+        visitDto.setVisitDTO(v);
+        List<Prescription> prescription = em.createNamedQuery("findPrescriptionById", Prescription.class).setParameter("id", v.getPrescriptionId()).getResultList();
+        visitDto.setPrescriptionDTO(prescription);
+        visitListDTO.add(visitDto);
+      }
+    } 
+    logger.log(Level.INFO, "getPatientDetailsByPatientId: {0}", patientId);
+    return visitListDTO;
+  }
   
     /**
    * * Retrieve a single patientDetails
