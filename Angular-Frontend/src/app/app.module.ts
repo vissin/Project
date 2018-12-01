@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { PatientComponent } from './patient/patient.component';
 import { ChemistComponent } from './chemist/chemist.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { PatientHistoryComponent } from './patient-history/patient-history.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DoctorComponent } from './doctor/doctor.component';
     FooterComponent,
     PatientComponent,
     ChemistComponent,
-    DoctorComponent
+    DoctorComponent,
+    PatientHistoryComponent
   ],
   imports: [
     BrowserModule,
