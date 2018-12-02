@@ -13,7 +13,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "patient")
 @NamedQueries(value = {
-  @NamedQuery(name = "findPatientById", query = "SELECT p FROM Patient p where p.id =:patId")}
+  @NamedQuery(name = "findPatientById", query = "SELECT p FROM Patient p where p.id =:patId"),
+  @NamedQuery(name = "findPatientByUserId", query = "SELECT p FROM Patient p where p.userId =:userId"),
+    
+}
 )
 public class Patient extends AbstractEntity {
 

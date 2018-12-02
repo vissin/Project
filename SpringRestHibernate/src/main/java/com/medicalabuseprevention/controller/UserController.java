@@ -85,7 +85,7 @@ public class UserController {
 
     if (user.getRole().equalsIgnoreCase("P")) {
       try {
-        Patient patient = em.createNamedQuery("findPatientById", Patient.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
+        Patient patient = em.createNamedQuery("findPatientByUserId", Patient.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
         userDTO.setPatient(patient);
         userDTO.setResult("Success");
         return userDTO;
