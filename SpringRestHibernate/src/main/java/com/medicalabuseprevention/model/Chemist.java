@@ -2,10 +2,20 @@ package com.medicalabuseprevention.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+@CrossOrigin(origins ="*", allowedHeaders="*")
 @Entity
 @Table(name = "chemist")
+@NamedQueries(value = {
+	    @NamedQuery(name = "findChemistById", query = "SELECT p FROM Chemist p where p.id =:id"),
+	    @NamedQuery(name = "findChemistByUserId", query = "SELECT p FROM Chemist p where p.userId =:userId")
+	  }
+	)
 public class Chemist extends AbstractEntity {
 
   @Column(name = "NAME")

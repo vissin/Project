@@ -10,12 +10,14 @@ import { isNullOrUndefined } from 'util';
 export class HeaderComponent implements OnInit {
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) { 
+  }
 
   ngOnInit() {
   }
 
   logout() {
+    debugger;
     localStorage.removeItem('token');
     this.router.navigate(['login']);
   }

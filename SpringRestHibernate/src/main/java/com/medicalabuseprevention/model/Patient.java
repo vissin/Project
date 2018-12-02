@@ -1,6 +1,7 @@
 package com.medicalabuseprevention.model;
 
 import com.medicalabuseprevention.enums.Gender;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -9,11 +10,18 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+@CrossOrigin(origins ="*", allowedHeaders="*")
 @Entity
 @Table(name = "patient")
 @NamedQueries(value = {
-  @NamedQuery(name = "findPatientById", query = "SELECT p FROM Patient p where p.id =:patId")}
+  @NamedQuery(name = "findPatientById", query = "SELECT p FROM Patient p where p.id =:patId"),
+  @NamedQuery(name = "findPatientByUserId", query = "SELECT p FROM Patient p where p.userId =:userId"),
+    
+}
 )
 public class Patient extends AbstractEntity {
 
@@ -35,7 +43,6 @@ public class Patient extends AbstractEntity {
   @Column(name = "PASSWORD")
   private String password;
   
-
   public String getName() {
     return name;
   }

@@ -1,3 +1,5 @@
+<app-header ></app-header>
+<div  class="container">
 <div class="container-fluid main-content">
   <div class="login-content">
     <form (ngSubmit)="onSearchSubmit(searchForm)" #searchForm="ngForm">
@@ -12,7 +14,17 @@
         </div>
       </div>
     </form>
-    <div style="margin-top: 20px;border: 2px solid#dcd1d1;padding: 30px;">
+    <div class="card" *ngIf="this.patient.name!=null" style="margin-top: 20px">
+      <div class="card-header"><b>Patient Details</b></div>
+      <div class="card-body" >
+        <div>Name : {{patient.name}}</div>
+        <div>Contact : {{patient.mobile}}</div>
+        <div>Gender : {{patient.gender}}</div>
+      </div> 
+     
+  </div>
+  
+    <div style="margin-top: 20px;border: 2px solid#dcd1d1;padding: 30px;" *ngIf="this.patient.name!=null">
       <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
@@ -20,7 +32,7 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-2">
-          <a href="#" routerLink="/patient-history/1">
+          <a  (click)="gotoPatientHistory()">
             <button class="btn btn-primary" type="button">View History</button>
           </a>
         </div>
@@ -30,8 +42,8 @@
           <form class="form-horizontal" (ngSubmit)="onSubmit(patientForm)" #patientForm="ngForm">
             <div class="form-group">
               <label class="control-label" for="patientId">Patient Id:</label>
-              <input class="form-control" id="patientId" name="patientId" type="text" [(ngModel)]="patientModel.patientId" #patientId="ngModel"
-                required/>
+              <input class="form-control" id="patientId" name="patientId" type="text" [(ngModel)]="this.patient.id" #patientId="ngModel"
+                required readonly="true"/>
             </div>
             <div class="form-group">
               <label class="control-label" for="height">Height:</label>
@@ -73,7 +85,7 @@
               <button type="button" color="primary" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">
                 <i class="fa fa-plus"></i> Add Medicine </button>
               <hr>
-              <table class="table" *ngIf="patientModel.medicines.length>0">
+              <table class="table" *ngIf="patientModel.medicine.length>0">
                 <thead>
                   <tr>
                     <th>Medicine</th>
@@ -83,7 +95,7 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let med of patientModel.medicines,index as i">
+                <tbody *ngFor="let med of patientModel.medicine,index as i">
                   <tr>
                     <td>{{med.medicine}}</td>
                     <td>{{med.dosage}}</td>
@@ -148,4 +160,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

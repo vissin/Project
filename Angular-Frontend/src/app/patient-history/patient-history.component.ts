@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Patient } from '../model/patient';
+import { CommonService } from 'src/app/service/common.service';
 
 @Component({
   selector: 'app-patient-history',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-history.component.css']
 })
 export class PatientHistoryComponent implements OnInit {
-
-  constructor() { }
+  patient: Patient = {} as Patient;
+  constructor(private commonService: CommonService) {
+   }
 
   ngOnInit() {
+      this.commonService.getPatientHistory(this.patient.id).subscribe((data) => {
+          debugger;
+      });
   }
 
 }

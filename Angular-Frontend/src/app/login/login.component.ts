@@ -25,15 +25,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    debugger;
     this.commonService.userLogin(this.loginModel).subscribe(
       (data) => {
-        debugger;
         if (data.result === 'Success') {
           localStorage.setItem('token', data.userId);
           switch (data.role) {
             case 'D': {
               this.doctor = data.doctor;
+              this.router.navigate(['doctor', this.doctor.id]);
               break;
             }
 
@@ -53,4 +52,5 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
 }

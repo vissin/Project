@@ -13,7 +13,6 @@ export class CommonService {
     constructor(private http: HttpClient) { }
 
     userLogin(loginModel): Observable<any> {
-        debugger;
         return this.http.post(this.baseUrl + 'user/login', loginModel).map(res => res);
     }
 
@@ -27,5 +26,13 @@ export class CommonService {
 
     updatePrescriptionDetails(presUpdate): Observable<any> {
         return this.http.put(this.baseUrl + 'prescription/update', presUpdate).map(res => res);
+    }
+
+    getPatientbyIdOnSearch(searchId) {
+        debugger;
+        return this.http.get(this.baseUrl + 'patient/' + searchId).map(res => res);
+    }
+    addPatientDetails(patientModel) {
+        return this.http.put(this.baseUrl + 'visit/update', patientModel).map(res => res);
     }
 }

@@ -7,6 +7,7 @@ package com.medicalabuseprevention.requestdto;
 public class PrescriptionUpdateRequest {
 
   private Long id;
+  private String medicine;
   private boolean provided;
 
   public Long getId() {
@@ -23,5 +24,13 @@ public class PrescriptionUpdateRequest {
 
   public void setProvided(boolean provided) {
     this.provided = provided;
+  }
+
+  public String getMedicine() {
+    return medicine;
+  }
+
+  public void setMedicine(String medicine) {
+    this.medicine = medicine;
   }
 }

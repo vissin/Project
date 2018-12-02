@@ -73,7 +73,7 @@ public class UserController {
 
     if (user.getRole().equalsIgnoreCase("C")) {
       try {
-        Chemist chemist = em.createNamedQuery("findPatientById", Chemist.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
+        Chemist chemist = em.createNamedQuery("findChemistByUserId", Chemist.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
         userDTO.setChemist(chemist);
         userDTO.setResult("Success");
         return userDTO;
@@ -85,7 +85,7 @@ public class UserController {
 
     if (user.getRole().equalsIgnoreCase("P")) {
       try {
-        Patient patient = em.createNamedQuery("findPatientById", Patient.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
+        Patient patient = em.createNamedQuery("findPatientByUserId", Patient.class).setParameter("userId", userRequest.getUserId()).getSingleResult();
         userDTO.setPatient(patient);
         userDTO.setResult("Success");
         return userDTO;

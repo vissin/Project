@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { isNullOrUndefined } from 'util';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,17 @@ import { isNullOrUndefined } from 'util';
 export class AppComponent implements OnInit {
   title = 'Medical-Abuse-Prevention';
   isLoggedIn = false;
+  constructor(private router: Router) {
+  }
+  ngOnInit(): void {
 
-  ngOnInit() {
     const userInfo = localStorage.getItem('token');
     if (!isNullOrUndefined(userInfo)) {
       this.isLoggedIn = true;
+    } else {
+    this.isLoggedIn = false;
+      this.router.navigate(['login']);
     }
   }
+
 }
