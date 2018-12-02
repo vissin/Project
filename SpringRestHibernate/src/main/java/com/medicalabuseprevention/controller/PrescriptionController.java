@@ -100,7 +100,7 @@ public class PrescriptionController {
     visit.setHeight(addPrescriptionRequest.getHeight());
     visit.setPatientId(addPrescriptionRequest.getPatientId());
     visit.setPurchaseFlag(false);
-    visit.setVisitDate((java.sql.Date) new Date());
+    visit.setVisitDate(new Date());
     visit.setWeight(addPrescriptionRequest.getWeight());
     visit.setTemperature(addPrescriptionRequest.getTemprature());
     
