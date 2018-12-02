@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  isLoggedIn = false;
+
   constructor() { }
 
   ngOnInit() {
+    const userInfo = localStorage.getItem('token');
+    if (!isNullOrUndefined(userInfo)) {
+      this.isLoggedIn = true;
+    }
   }
 
 }

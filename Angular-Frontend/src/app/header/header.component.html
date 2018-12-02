@@ -1,13 +1,16 @@
-<nav class="navbar navbar-dark bg-dark mb-5">
+<nav *ngIf="isLoggedIn" class="navbar navbar-dark bg-dark mb-5">
   <a class="navbar-brand" href="/">Medical Abuse Prevention</a>
   <div class="navbar-expand mr-auto">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home</a>
-      <a class="nav-item nav-link" href="#">About</a>
-      <a class="nav-item nav-link" href="#">Contact</a>
+      <a href="#" class="nav-item nav-link">Home</a>
+      <a routerLink="/about" class="nav-item nav-link">About</a>
+      <a routerLink="/contact" class="nav-item nav-link">Contact</a>
     </div>
   </div>
   <div class="navbar-expand ml-auto navbar-nav">
    
   </div>
+  <ul class="nav navbar-nav navbar-right">
+    <li style="color:white;">Logout <i title="logout" (click)="logout()" style="cursor:pointer;" class="fa fa-sign-out"></i></li>
+  </ul>
 </nav>
