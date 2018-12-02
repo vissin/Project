@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "patient")
@@ -38,6 +39,16 @@ public class Patient extends AbstractEntity {
   @Column(name = "PASSWORD")
   private String password;
   
+  @Transient
+  private String result;
+
+  public String getResult() {
+    return result;
+  }
+
+  public void setResult(String result) {
+    this.result = result;
+  }
 
   public String getName() {
     return name;

@@ -131,8 +131,15 @@ public class PrescriptionController {
   @RequestMapping(value = "/patient/{patientId}", produces = "application/json", method = RequestMethod.GET)
   public Patient getPatientDetailsByPatientId(@PathVariable("patientId") long patientId) {
     logger.log(Level.INFO, "getPatientDetailsByPatientId: {0}", patientId);
-
-    Patient patient = em.createNamedQuery("findPatientById", Patient.class).setParameter("patId", patientId).getSingleResult();
+    Patient patient = null;
+    try{
+      patient = em.createNamedQuery("findPatientById", Patient.class).setParameter("patId", patientId).getSingleResult();
+      patient.setResult("Success");
+    } catch(Exception e){
+      logger.log(Level.WARNING,"Not existed Patient" + patientId);
+      patient = new Patient();
+      patient.setResult("Not Found");
+    }
     logger.log(Level.INFO, "getVisitDetailsByVisitId: {0}", patientId);
     return patient;
   }  
