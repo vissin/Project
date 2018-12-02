@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Entity
 @Table(name = "visit")
 @NamedQueries(value = {
-  @NamedQuery(name = "findVisitById", query = "SELECT p FROM Visit p where p.id =:visitId")}
+  @NamedQuery(name = "findVisitById", query = "SELECT p FROM Visit p where p.id =:visitId"),
+  @NamedQuery(name = "findVisitByPatientId", query = "SELECT p FROM Visit p where p.patientId =:patientId"),
+  }
 )
 public class Visit extends AbstractEntity {
 
