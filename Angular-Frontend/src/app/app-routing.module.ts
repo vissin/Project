@@ -40,8 +40,8 @@ const routes: Routes = [
   },
   {
     path: 'patient-history/:id',
-    component: PatientHistoryComponent,
-    canActivate: [AuthGuard]
+    component: PatientHistoryComponent
+    // canActivate: [AuthGuard]
   }
 ];
 

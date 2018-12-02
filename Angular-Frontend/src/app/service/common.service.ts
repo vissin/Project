@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CommonService {
 
-    baseUrl = 'http://SLW10162.spanservices.com:28080/SpringRestHibernate/';
+    baseUrl = 'http://SLW10350.spanservices.com:8080/SpringRestHibernate/';
 
     constructor(private http: HttpClient) { }
 
@@ -18,6 +18,13 @@ export class CommonService {
     }
 
     getPatientHistory(id): Observable<any> {
-        return this.http.get(this.baseUrl + 'patient/' + id).map(res => res);
+        return this.http.get(this.baseUrl + 'patienthistory/' + id).map(res => res);
+    }
+    getPatientbyIdOnSearch(searchId) {
+        debugger;
+        return this.http.get(this.baseUrl + 'patient/' + searchId).map(res => res);
+    }
+    addPatientDetails(patientModel) {
+        return this.http.put(this.baseUrl + 'visit/update', patientModel).map(res => res);
     }
 }

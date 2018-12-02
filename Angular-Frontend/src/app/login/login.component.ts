@@ -23,56 +23,38 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  // onSubmit() {
-  //   debugger;
-  //   this.commonService.userLogin(this.loginModel).subscribe(
-  //     (data) => {
-  //       debugger;
-  //       if (data.result === 'Success') {
-  //         localStorage.setItem('token', data.userId);
-  //         switch (this.role) {
-  //           case 'D': {
-  //             this.doctor = data.doctor;
-  //             break;
-  //           }
-
-  //           case 'P': {
-  //             this.patient = data.patient;
-  //             this.router.navigate(['patient', this.patient.id]);
-  //             break;
-  //           }
-
-  //           case 'C': {
-  //             this.chemist = data.chemist;
-  //             break;
-  //           }
-  //         }
-  //       }
-  //       debugger;
-  //     }
-  //   );
-  // }
-
+   
   onSubmit() {
-    switch (this.role) {
-      case 'D': {
-       // this.doctor = data.doctor;
-        break;
-      }
-
-      case 'P': {
+    debugger;
+    this.commonService.userLogin(this.loginModel).subscribe(
+      (data) => {
         debugger;
-       // this.patient = data.patient;
-       this.patient.id = 1;
-        this.router.navigate(['patient', this.patient.id]);
-        break;
-      }
+        if (data.result === 'Success') {
+          localStorage.setItem('token', data.userId);
+          switch (data.role) {
+            case 'D': {
+              debugger;
+              this.doctor = data.doctor;
+              this.router.navigate(['doctor', this.doctor.id]);
+              break;
+            }
 
-      case 'C': {
-        // this.chemist = data.chemist;
-        break;
+            case 'P': {
+              this.patient = data.patient;
+              this.router.navigate(['patient', this.patient.id]);
+              break;
+            }
+
+            case 'C': {
+              this.chemist = data.chemist;
+              break;
+            }
+          }
+        }
+        debugger;
       }
-    }
+    );
   }
+ 
+  
 }

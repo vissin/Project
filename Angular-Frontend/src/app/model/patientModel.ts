@@ -7,7 +7,7 @@ export interface PatientModel {
     height: string;
     weight: string;
     findings: string;
-    medicines: PrescriptionMed[];
+    medicine: PrescriptionMed[];
     followupDate: Date;
     bloodPressure: string;
     temprature: string;

@@ -11,16 +11,21 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) { 
+  }
 
   ngOnInit() {
     const userInfo = localStorage.getItem('token');
     if (!isNullOrUndefined(userInfo)) {
       this.isLoggedIn = true;
+    } else { this.isLoggedIn = false;
+      this.router.navigate(['login']);
     }
   }
 
   logout() {
+    debugger;
+    this.isLoggedIn = false;
     localStorage.removeItem('token');
     this.router.navigate(['login']);
   }
