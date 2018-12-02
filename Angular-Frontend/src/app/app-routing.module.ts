@@ -31,17 +31,17 @@ const routes: Routes = [
   {
     path: 'chemist/:id',
     component: ChemistComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'doctor/:id',
     component: DoctorComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'patient-history/:id',
-    component: PatientHistoryComponent
-    // canActivate: [AuthGuard]
+    component: PatientHistoryComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

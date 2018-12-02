@@ -35,6 +35,7 @@ export class ChemistComponent implements OnInit {
   }
 
   onSearchSubmit() {
+    this.prescriptions = [] as Prescription[];
     this.commonService.getPatientVisitDetails(this.searchId).subscribe(
       (data) => {
         debugger;
@@ -55,7 +56,8 @@ export class ChemistComponent implements OnInit {
   updatePrescriptionDetails() {
     this.commonService.updatePrescriptionDetails(this.prescriptionUpdates).subscribe(
       (data) => {
-        debugger;
+        window.alert('Details has been added updated');
+        this.isPatient = false;
       }
     );
   }
