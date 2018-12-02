@@ -8,15 +8,9 @@ import { isNullOrUndefined } from 'util';
 })
 export class FooterComponent implements OnInit {
 
-  isLoggedIn = false;
-
   constructor() { }
 
   ngOnInit() {
-    const userInfo = localStorage.getItem('token');
-    if (!isNullOrUndefined(userInfo)) {
-      this.isLoggedIn = true;
-    }
   }
 
 }

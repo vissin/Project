@@ -3,6 +3,8 @@ import { isNullOrUndefined } from 'util';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CommonService } from 'src/app/service/common.service';
 import { Patient } from 'src/app/model/patient';
+import { PatientHistoryDetails } from 'src/app/model/patientHistoryDetails';
+import { Visit } from 'src/app/model/visit';
 
 @Component({
   selector: 'app-patient',
@@ -11,7 +13,8 @@ import { Patient } from 'src/app/model/patient';
 })
 export class PatientComponent implements OnInit {
 
-  patientHistory: Patient[] = [] as Patient[];
+  patientHistory: Visit[] = [] as Visit[];
+  patientHistoryDetails: PatientHistoryDetails[] = [] as PatientHistoryDetails[];
 
   constructor(private route: ActivatedRoute, private commonService: CommonService) { }
 
@@ -25,7 +28,20 @@ export class PatientComponent implements OnInit {
       if (!isNullOrUndefined(patientId)) {
         this.commonService.getPatientHistory(patientId).subscribe(
           (data) => {
+            debugger;
             this.patientHistory = data;
+            this.patientHistory.forEach(val => {
+              debugger;
+                const patientDet = {} as PatientHistoryDetails;
+                patientDet.doctor = val.doctorDTO.name;
+                patientDet.date = val.visitDTO.visitDate;
+                const medicines = [];
+                val.prescriptionDTO.forEach(x => {
+                  medicines.push(x.medicine);
+                });
+                patientDet.medicines = medicines.join(',');
+                this.patientHistoryDetails.push(patientDet);
+            });
           }
         );
       }

@@ -9,15 +9,10 @@ import { isNullOrUndefined } from 'util';
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn = false;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    const userInfo = localStorage.getItem('token');
-    if (!isNullOrUndefined(userInfo)) {
-      this.isLoggedIn = true;
-    }
   }
 
   logout() {

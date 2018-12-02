@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-          <input name="searchtext" class="form-control" id="search" type="text" [(ngModel)]="search" #searchtext="ngModel" placeholder="Search by Visit Id"
+          <input name="searchtext" class="form-control" id="search" type="text" [(ngModel)]="searchId" #searchtext="ngModel" placeholder="Search by Visit Id"
           />
         </div>
         <div class="col-md-4">
@@ -12,5 +12,13 @@
         </div>
       </div>
     </form>
+    <div class="form-check" *ngFor="let pres of prescriptionUpdates">
+      <input class="form-check-input" (change)="onChange(pres, $event.target.checked)" name="{{ pres.medicine }}" type="checkbox"
+        id="{{pres.medicine}}">
+      <label class="form-check-label" for="{{pres.medicine}}">
+        {{pres.medicine}}
+      </label>
+    </div>
+    <button type="submit" (click)="updatePrescriptionDetails()" class="btn btn-primary">Update</button>
   </div>
 </div>
