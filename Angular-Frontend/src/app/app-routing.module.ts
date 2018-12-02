@@ -6,6 +6,7 @@ import { DoctorComponent } from './doctor/doctor.component';
 
 import { ChemistComponent } from 'src/app/chemist/chemist.component';
 import { PatientHistoryComponent } from './patient-history/patient-history.component';
+import { AuthGuard } from 'src/app/service/auth.guard';
 
 // const routes: Routes = [
 //   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -24,19 +25,23 @@ const routes: Routes = [
   },
   {
     path: 'patient/:id',
-    component: PatientComponent
+    component: PatientComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'chemist/:id',
-    component: ChemistComponent
+    component: ChemistComponent,
+    // canActivate: [AuthGuard]
   },
   {
     path: 'doctor/:id',
-    component: DoctorComponent
+    component: DoctorComponent,
+    // canActivate: [AuthGuard]
   },
   {
     path: 'patient-history/:id',
-    component: PatientHistoryComponent
+    component: PatientHistoryComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
