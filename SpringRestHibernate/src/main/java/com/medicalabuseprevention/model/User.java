@@ -6,6 +6,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+@CrossOrigin(origins ="*", allowedHeaders="*")
 @Entity
 @Table(name = "USER")
 @NamedQueries(value = { @NamedQuery(name = "fetchUserForAuth", query = "SELECT u FROM User u where u.name =:name and u.password =:password") })

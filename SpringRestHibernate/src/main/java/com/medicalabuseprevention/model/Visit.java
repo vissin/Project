@@ -1,7 +1,7 @@
 package com.medicalabuseprevention.model;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +9,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+@CrossOrigin(origins ="*", allowedHeaders="*")
 @Entity
 @Table(name = "visit")
 @NamedQueries(value = {
-  @NamedQuery(name = "findVisitById", query = "SELECT p FROM Visit p where p.id =:visitId")}
+  @NamedQuery(name = "findVisitById", query = "SELECT p FROM Visit p where p.id =:visitId"),
+  @NamedQuery(name = "findVisitByPatientId", query = "SELECT p FROM Visit p where p.patientId =:patientId"),
+  @NamedQuery(name = "FindMaxID", query = "SELECT p FROM Visit p where p.patientId =:patientId"),
+  }
 )
 public class Visit extends AbstractEntity {
 
@@ -32,7 +38,7 @@ public class Visit extends AbstractEntity {
 
   private boolean purchaseFlag;
 
-  private Date visitDate;
+  private String visitDate;
 
   public String getBloodPressure() {
     return bloodPressure;
@@ -98,11 +104,11 @@ public class Visit extends AbstractEntity {
     this.height = height;
   }
 
-  public Date getVisitDate() {
+  public String getVisitDate() {
     return visitDate;
   }
 
-  public void setVisitDate(Date visitDate) {
+  public void setVisitDate(String visitDate) {
     this.visitDate = visitDate;
   }
 }
