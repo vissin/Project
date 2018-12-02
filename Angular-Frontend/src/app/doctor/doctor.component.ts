@@ -45,8 +45,9 @@ export class DoctorComponent implements OnInit {
     console.log(this.patientModel);
     this.commonService.addPatientDetails(this.patientModel).subscribe((data) => {
       if (data === true) {
+        debugger;
         window.alert('Details has been added succesfully');
-         this.patient = null;
+         this.patient.name = null;
          this.patientModel = null;
          this.search = null;
       } else {
