@@ -12,13 +12,32 @@
         </div>
       </div>
     </form>
-    <div class="form-check" *ngFor="let pres of prescriptionUpdates">
-      <input class="form-check-input" (change)="onChange(pres, $event.target.checked)" name="{{ pres.medicine }}" type="checkbox"
-        id="{{pres.medicine}}">
-      <label class="form-check-label" for="{{pres.medicine}}">
-        {{pres.medicine}}
-      </label>
+    <div *ngIf="isPatient">
+      <div class="card">
+        <div class="card-body">
+          <label>
+            <b> Name</b>:</label>
+          <p>{{ patient.name }}</p>
+          <label>
+            <b> DOB</b>:</label>
+          <p>{{ patient.birthDate }}</p>
+          <label>
+            <b> Gender</b>:</label>
+          <p>{{ patient.gender }}</p>
+          <label>
+            <b> Mobile</b>:</label>
+          <p>{{ patient.mobile }}</p>
+        </div>
+      </div>
+      <div class="form-check" *ngFor="let pres of prescriptionUpdates">
+        <input class="form-check-input" [checked]="pres.provided" (change)="onChange(pres, $event.target.checked)" name="{{ pres.medicine }}"
+          type="checkbox" id="{{pres.medicine}}">
+        <label class="form-check-label" for="{{pres.medicine}}">
+          {{pres.medicine}}
+        </label>
+      </div>
+      <button type="submit" (click)="updatePrescriptionDetails()" class="btn btn-primary">Update</button>
+
     </div>
-    <button type="submit" (click)="updatePrescriptionDetails()" class="btn btn-primary">Update</button>
   </div>
 </div>

@@ -12,8 +12,8 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   constructor(private router: Router) {
   }
-  ngOnInit(): void {
 
+  ngOnInit(): void {
     const userInfo = localStorage.getItem('token');
     if (!isNullOrUndefined(userInfo)) {
       this.isLoggedIn = true;

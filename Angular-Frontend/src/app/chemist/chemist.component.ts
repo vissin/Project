@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/service/common.service';
 import { Prescription } from 'src/app/model/prescription';
 import { PrescriptionUpdateModel } from 'src/app/model/prescriptionUpdateModel';
+import { PatientHistoryDetails } from 'src/app/model/patientHistoryDetails';
+import { Patient } from 'src/app/model/patient';
 
 @Component({
   selector: 'app-chemist',
@@ -11,7 +13,9 @@ import { PrescriptionUpdateModel } from 'src/app/model/prescriptionUpdateModel';
 export class ChemistComponent implements OnInit {
   searchId: number;
   prescriptions: Prescription[];
+  patient: Patient = {} as Patient  ;
   prescriptionUpdates: PrescriptionUpdateModel[] = [] as PrescriptionUpdateModel[];
+  isPatient = false;
 
   constructor(private commonService: CommonService) { }
 
@@ -34,11 +38,13 @@ export class ChemistComponent implements OnInit {
     this.commonService.getPatientVisitDetails(this.searchId).subscribe(
       (data) => {
         debugger;
+        this.isPatient = true;
+        this.patient = data.patientDTO;
         this.prescriptions = data.prescriptionDTO;
         this.prescriptions.forEach(val => {
           const pres = {} as PrescriptionUpdateModel;
           pres.id = val.id;
-          pres.provided = false;
+          pres.provided = val.provided;
           pres.medicine = val.medicine;
           this.prescriptionUpdates.push(pres);
         });
@@ -46,7 +52,7 @@ export class ChemistComponent implements OnInit {
     );
   }
 
-  updatePrescriptionDetails(){
+  updatePrescriptionDetails() {
     this.commonService.updatePrescriptionDetails(this.prescriptionUpdates).subscribe(
       (data) => {
         debugger;

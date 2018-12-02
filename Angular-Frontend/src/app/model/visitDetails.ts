@@ -6,5 +6,5 @@ export interface VisitDetails {
     prescriptionId: number;
     temperature: string;
     purchaseFlag: boolean;
-    visitDate: Date;
+    visitDate: string;
 }

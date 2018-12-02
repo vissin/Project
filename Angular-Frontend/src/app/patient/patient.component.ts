@@ -5,6 +5,7 @@ import { CommonService } from 'src/app/service/common.service';
 import { Patient } from 'src/app/model/patient';
 import { PatientHistoryDetails } from 'src/app/model/patientHistoryDetails';
 import { Visit } from 'src/app/model/visit';
+import { VisitDetails } from 'src/app/model/visitDetails';
 
 @Component({
   selector: 'app-patient',
@@ -28,10 +29,8 @@ export class PatientComponent implements OnInit {
       if (!isNullOrUndefined(patientId)) {
         this.commonService.getPatientHistory(patientId).subscribe(
           (data) => {
-            debugger;
             this.patientHistory = data;
             this.patientHistory.forEach(val => {
-              debugger;
                 const patientDet = {} as PatientHistoryDetails;
                 patientDet.doctor = val.doctorDTO.name;
                 patientDet.date = val.visitDTO.visitDate;
