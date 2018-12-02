@@ -1,6 +1,7 @@
 package com.medicalabuseprevention.model;
 
 import com.medicalabuseprevention.enums.Gender;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -11,6 +12,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+@CrossOrigin(origins ="*", allowedHeaders="*")
 @Entity
 @Table(name = "patient")
 @NamedQueries(value = {
