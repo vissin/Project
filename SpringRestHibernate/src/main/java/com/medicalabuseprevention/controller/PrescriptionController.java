@@ -3,6 +3,7 @@ package com.medicalabuseprevention.controller;
 import com.medicalabuseprevention.model.Doctor;
 import com.medicalabuseprevention.model.Patient;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -24,8 +25,8 @@ import com.medicalabuseprevention.model.Visit;
 import com.medicalabuseprevention.requestdto.PrescriptionMedDTO;
 import com.medicalabuseprevention.requestdto.VisitDTO;
 import com.medicalabuseprevention.requestdto.VisitPrescriptionDTO;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 
@@ -115,10 +116,13 @@ public class PrescriptionController {
 		visit.setHeight(addPrescriptionRequest.getHeight());
 		visit.setPatientId(addPrescriptionRequest.getPatientId());
 		visit.setPurchaseFlag(false);
-		visit.setVisitDate(new Date());
+		visit.setVisitDate(new Date().toLocaleString());
 		visit.setWeight(addPrescriptionRequest.getWeight());
 		visit.setTemperature(addPrescriptionRequest.getTemprature());
-
+		BigInteger id = (BigInteger) em.createNativeQuery("select max(id)+1 as next_seq from visit").getSingleResult();
+		//long id = Long.valueOf(String.valueOf(tuple[0]));
+		visit.setId(id.longValue());
+		System.out.println("NEW ID  :" + visit.getId());
 		em.persist(visit);
 
 		logger.log(Level.INFO, "Visit ID: {0}", visit.getId());
@@ -131,7 +135,9 @@ public class PrescriptionController {
 				pres.setDosage(pmd.getDosage());
 				pres.setTimes(pmd.getTimes());
 				pres.setVisitId(visit.getId());
-
+				BigInteger presId = (BigInteger) em.createNativeQuery("select max(id)+1 as next_seq from prescription").getSingleResult();
+				//long id = Long.valueOf(String.valueOf(tuple[0]));
+				pres.setId(presId.longValue());
 				em.persist(pres);
 			}
 		}
@@ -188,6 +194,9 @@ public class PrescriptionController {
 						.setParameter("visitId", v.getId())
 						.getResultList();
 				visitDto.setPrescriptionDTO(prescription);
+				
+		        Doctor doctor = em.createNamedQuery("findDoctorById", Doctor.class).setParameter("doctorId", v.getDoctorId()).getSingleResult();
+		        visitDto.setDoctorDTO(doctor); 
 				visitListDTO.add(visitDto);
 			}
 		}
